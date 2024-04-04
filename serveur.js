@@ -25,6 +25,17 @@ const server = createServer((req, res) => {
             }
             res.end();
         });
+    } else if (req.url.endsWith('.js')) {
+        res.writeHead(200, {'Content-Type': 'application/javascript'});
+        fs.readFile(req.url.slice(1), function(err, data) {
+            if (err) {
+                res.writeHead(404);
+                res.write('Error: File Not Found');
+            } else {
+                res.write(data);
+            }
+            res.end();
+        });
     }
 });
 server.listen(3000, () => {
