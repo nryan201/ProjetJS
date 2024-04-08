@@ -1,7 +1,7 @@
 import { createReadStream } from 'node:fs';
 import { createServer } from 'node:http';
 import fs from 'node:fs';
-import { exec } from 'child_process'; 
+import { exec } from 'child_process';
 
 const server = createServer((req, res) => {
     if (req.url === '/') {
@@ -28,6 +28,29 @@ const server = createServer((req, res) => {
         });
     } else if (req.url.endsWith('.js')) {
         res.writeHead(200, {'Content-Type': 'application/javascript'});
+        fs.readFile(req.url.slice(1), function(err, data) {
+            if (err) {
+                res.writeHead(404);
+                res.write('Error: File Not Found');
+            } else {
+                res.write(data);
+            }
+            res.end();
+        });
+    } else if (req.url.endsWith('.png')) {
+        res.writeHead(200, {'Content-Type': 'image/png'});
+        fs.readFile(req.url.slice(1), function(err, data) {
+            if (err) {
+                res.writeHead(404);
+                res.write('Error: File Not Found');
+            } else {
+                res.write(data);
+            }
+            res.end();
+        });
+    }
+    else if (req.url.endsWith('.otf')) {
+        res.writeHead(200, {'Content-Type': 'font/otf'});
         fs.readFile(req.url.slice(1), function(err, data) {
             if (err) {
                 res.writeHead(404);
