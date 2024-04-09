@@ -5,7 +5,7 @@ const highScoreText = document.getElementById('highscore');
 
 //Variables
 const gridSizex= 30;
-const gridSizey= 25;
+const gridSizey= 23;
 let snake = [{x: 10, y: 10}];
 let food = generateFoodPosition();
 let direction = 'right';
