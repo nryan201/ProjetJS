@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 
-    <title>Title</title>
 </head>
 <body>
-<canvas>
+<div class="GlobalContainer">
+    <div class="HealthBar">
+        <div class="Player">
+            <div  class="PlayerHealthBar"></div>
+            <div id="PlayerHealth" class="GlobalPLayerHealthBar"></div>
+        </div>
+        <div id="Timer" class="Timer"></div>
+        <div class="Enemy">
+            <div  class="EnemyHealthBar"></div>
+            <div id="EnemyHealth" class="GlobalEnemyHealthBar"></div>
+        </div>
+    </div>
+    <div  id="Tie" class="Tie">Tie</div>
+    <canvas></canvas>
 
-</canvas>
-<script src="script.js"></script>
+</div>
+<script src="js/utils.js"></script>
+<script src="js/classes.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
