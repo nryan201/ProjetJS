@@ -18,10 +18,21 @@ const Player = new Fighter({
         y: 0},
     velocity:{x: 0,
         y: 0},
-    offset: {x: 0,
-        y: 0},
-
-});
+    imageSrc: './Sprite/MedievalWarriorPack/Idle.png',
+    framesMax: 6,
+    scale: 2.5,
+    offset: {x: 44,
+        y: 81},
+    sprites: {
+        idle :{
+            imageSrc: './Sprite/MedievalWarriorPack/Idle.png',
+            framesMax: 6,
+        },
+    run :{
+        imageSrc: './Sprite/MedievalWarriorPack/Run.png',
+        framesMax: 8,
+        image: new Image(),},
+    }});
 const Enemy = new Fighter({
     position:{x: 100,
         y: 100},
@@ -61,24 +72,42 @@ const keys = {
 }
 
 decreaseTimer()
-function  animate() {
+function animate() {
     requestAnimationFrame(animate);
-    c.fillStyle = 'black'
+    c.fillStyle = 'black'; // Efface le canvas avec un fond noir
     c.fillRect(0, 0, canvas.width, canvas.height);
-    background.update();
-    Player.update();
-    Enemy.update();
 
-    Player.velocity.x = 0;
-    Enemy.velocity.x = 0;
+    background.drawbackground(); // Dessine le fond
 
     // Player
-    if(keys.q.pressed && Player.lastKey === 'q') {
+    // Réinitialisez la vitesse du joueur pour ne pas continuer à bouger si aucune touche n'est pressée
+    Player.velocity.x = 0;
+
+    // Gère la logique de déplacement vers la gauche
+    if (keys.q.pressed && Player.lastKey === 'q') {
         Player.velocity.x = -3;
+        if (!Player.isRunning) {
+            Player.changeSprite('run');
+            Player.isRunning = true; // Indique que le joueur court maintenant
+        }
     }
-     else if(keys.d.pressed && Player.lastKey === 'd') {
+    // Gère la logique de déplacement vers la droite
+    else if (keys.d.pressed && Player.lastKey === 'd') {
         Player.velocity.x = 3;
+        if (!Player.isRunning) {
+            Player.changeSprite('run');
+            Player.isRunning = true;
+        }
     }
+    // Si aucune touche de déplacement n'est pressée, l'animation revient à 'idle'
+    else {
+        if (Player.isRunning) {
+            Player.changeSprite('idle');
+            Player.isRunning = false; // Le joueur n'est plus en train de courir
+        }
+    }
+
+    Player.update();
 
     // Enemy
     if(keys.ArrowLeft.pressed && Enemy.lastKey === 'ArrowLeft') {

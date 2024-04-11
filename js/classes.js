@@ -1,26 +1,79 @@
 class Sprite {
-    constructor({position,imageSrc}) {
+    constructor({position, imageSrc, scale = 1, framesMax = 1,framesCurrent = 0, framesElapsed = 0, framesHold = 0,offset = {x: 0, y: 0}}) {
         this.position = position;
         this.image = new Image();
         this.image.src = imageSrc;
+        this.scale = scale;
+        this.image.onload = () => {
+            this.scaleWidth = canvas.width / this.image.width;
+            this.scaleHeight = canvas.height / this.image.height;
+        }
+        this.framesMax = framesMax
+        this.framesCurrent = framesCurrent
+        this.framesElapsed = framesElapsed
+        this.framesHold = framesHold
+        this.offset = offset
     }
-    draw() {
-        c.drawImage(this.image, this.position.x, this.position.y,canvas.width,
-            canvas.height );
 
+    drawbackground() {
+        c.drawImage(this.image, this.position.x, this.position.y, this.image.width * this.scaleWidth, this.image.height * this.scaleHeight);
     }
-    update(){
+
+    draw() {
+        c.drawImage(
+            this.image,
+            this.framesCurrent * (this.image.width / this.framesMax),
+            0,
+            this.image.width / this.framesMax,
+            this.image.height,
+            this.position.x-this.offset.x,
+            this.position.y-this.offset.y,
+            (this.image.width / this.framesMax) * this.scale,
+            this.image.height * this.scale
+        );
+    }
+
+
+    animateFrames(){
+        this.framesElapsed++
+        if (this.framesElapsed % this.framesHold === 0) {
+            if (this.framesCurrent < this.framesMax - 1) {
+                this.framesCurrent++
+            } else {
+                this.framesCurrent = 0
+            }
+        }
+    }
+
+    changeSprite(sprite) {
+        if (this.image !== this.sprites[sprite].image) {
+            this.image = this.sprites[sprite].image;
+            this.framesMax = this.sprites[sprite].framesMax; // Met à jour framesMax
+            this.framesCurrent = 0; // Réinitialise framesCurrent pour commencer l'animation du début
+        }
+    }
+    update() {
         this.draw();
-    }
+        this.animateFrames()
+        }
 }
 
 
 
 
 
-class Fighter {
-    constructor({position,velocity,color= 'white',offset}) {
-        this.position = position;
+class Fighter extends Sprite {
+    constructor({position,velocity,color= 'white',
+                    imageSrc, scale = 1,framesMax = 8,
+                    offset = {x: 0, y: 0},
+                    sprites}) {
+        super({
+            position,
+            imageSrc,
+            scale,
+            offset,
+            framesMax
+        });
         this.velocity = velocity;
         this.height = 150;
         this.width = 50;
@@ -37,19 +90,23 @@ class Fighter {
         this.color =color;
         this.isAttacking = false;
         this.health = 100;
-    }
-    draw() {
-        c.fillStyle = this.color;
-        c.fillRect(this.position.x, this.position.y, 50,this.height);
+        this.framesCurrent = 0;
+        this.framesElapsed = 0;
+        this.framesHold = 15;
+        this.framesMax = framesMax;
+        this.sprites = sprites;
+        this.isRunning = false;
 
-        //Attack Box
-        if (this.isAttacking) {
-            c.fillStyle = 'red';
-            c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
+        for (const sprite in this.sprites) {
+            sprites[sprite].image = new Image();
+            sprites[sprite].image.src = sprites[sprite].imageSrc
         }
     }
+
     update(){
         this.draw();
+        this.animateFrames();
+
         this.attackBox.position.x = this.position.x+ this.attackBox.offset.x ;
         this.attackBox.position.y = this.position.y ;
 
@@ -57,7 +114,7 @@ class Fighter {
         this.position.x+=this.velocity.x;
         this.position.y+=this.velocity.y;
 
-        if(this.position.y + this.height+this.velocity.y >= canvas.height-76) {
+        if(this.position.y + this.height+this.velocity.y >= canvas.height-(canvas.height/4.7)) {
             this.velocity.y = 0
         } else {
             this.velocity.y+=gravity;
