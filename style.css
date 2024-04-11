@@ -1,3 +1,26 @@
-body {
-    background-color: #63d920;
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Honk&family=Patua+One&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: lightskyblue;
+}
+
+body, .quote-input{
+    font-family: "Patua One", serif;
+}
+
+.container{
+    background-color: yellow;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 700px;
+    max-width: 90%;
 }

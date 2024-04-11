@@ -63,3 +63,4 @@ function openBrowser(url) {
     args.push(url);
     exec(cmd + ' ' + args.join(' ')); // Exécute la commande système pour ouvrir l'URL dans le navigateur
 }
+
