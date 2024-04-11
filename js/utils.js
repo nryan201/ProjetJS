@@ -10,7 +10,7 @@ function rectangelCollision(rectangle1, rectangle2) {
     )
 }
 let timerId
-let timer=30
+let timer=60
 const Timer = document.getElementById('Timer')
 Timer.innerText= timer
 
