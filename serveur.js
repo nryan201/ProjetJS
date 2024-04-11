@@ -4,63 +4,28 @@ import fs from 'node:fs';
 import { exec } from 'child_process';
 
 const server = createServer((req, res) => {
-    if (req.url === '/') {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        fs.readFile('index.html', function(err, data) {
-            if (err) {
-                res.writeHead(404);
-                res.write('Error: File Not Found');
-            } else {
-                res.write(data);
+    let filePath = req.url === '/' ? 'index.html' : req.url.slice(1); // Si l'URL est '/', chargez 'index.html'
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/plain'});
+            res.end('Error: File Not Found');
+        } else {
+            // Déterminez le type de contenu en fonction de l'extension du fichier
+            let contentType = 'text/html';
+            if (filePath.endsWith('.css')) {
+                contentType = 'text/css';
+            } else if (filePath.endsWith('.js')) {
+                contentType = 'application/javascript';
+            } else if (filePath.endsWith('.png')) {
+                contentType = 'image/png';
+            } else if (filePath.endsWith('.otf')) {
+                contentType = 'font/otf';
             }
-            res.end();
-        });
-    } else if (req.url === '/style.css') {
-        res.writeHead(200, {'Content-Type': 'text/css'});
-        fs.readFile('style.css', function(err, data) {
-            if (err) {
-                res.writeHead(404);
-                res.write('Error: File Not Found');
-            } else {
-                res.write(data);
-            }
-            res.end();
-        });
-    } else if (req.url.endsWith('.js')) {
-        res.writeHead(200, {'Content-Type': 'application/javascript'});
-        fs.readFile(req.url.slice(1), function(err, data) {
-            if (err) {
-                res.writeHead(404);
-                res.write('Error: File Not Found');
-            } else {
-                res.write(data);
-            }
-            res.end();
-        });
-    } else if (req.url.endsWith('.png')) {
-        res.writeHead(200, {'Content-Type': 'image/png'});
-        fs.readFile(req.url.slice(1), function(err, data) {
-            if (err) {
-                res.writeHead(404);
-                res.write('Error: File Not Found');
-            } else {
-                res.write(data);
-            }
-            res.end();
-        });
-    }
-    else if (req.url.endsWith('.otf')) {
-        res.writeHead(200, {'Content-Type': 'font/otf'});
-        fs.readFile(req.url.slice(1), function(err, data) {
-            if (err) {
-                res.writeHead(404);
-                res.write('Error: File Not Found');
-            } else {
-                res.write(data);
-            }
-            res.end();
-        });
-    }
+
+            res.writeHead(200, {'Content-Type': contentType});
+            res.end(data);
+        }
+    });
 });
 
 server.listen(3000, () => {

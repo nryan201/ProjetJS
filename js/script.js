@@ -31,16 +31,70 @@ const Player = new Fighter({
     run :{
         imageSrc: './Sprite/MedievalWarriorPack/Run.png',
         framesMax: 8,
-        image: new Image(),},
-    }});
+    },
+    jump : {
+        imageSrc: './Sprite/MedievalWarriorPack/Jump.png',
+        framesMax: 2,
+
+    },
+    fall : {
+        imageSrc: './Sprite/MedievalWarriorPack/Fall.png',
+        framesMax: 2,
+    },
+    attack1 : {
+        imageSrc: './Sprite/MedievalWarriorPack/Attack1.png',
+        framesMax: 4,
+    }
+
+
+    },
+    attackBox: {
+        offset: {x: 250, y: 100},
+        width: 160,
+        height: 50,
+    }
+});
+
 const Enemy = new Fighter({
-    position:{x: 100,
-        y: 100},
+    position:{x: 0,
+        y: 0},
     velocity:{x: 0,
         y: 0},
-    color:'blue',
-    offset: {x: -50,
-        y: 0},
+    imageSrc: './Sprite/MedievalKingPack/Idle.png',
+    framesMax: 6,
+    scale: 2.7,
+    offset: {x: 34,
+        y: 81},
+    sprites: {
+        idle :{
+            imageSrc: './Sprite/MedievalKingPack/Idle.png',
+            framesMax: 6,
+        },
+        run :{
+            imageSrc: './Sprite/MedievalKingPack/Run.png',
+            framesMax: 8,
+        },
+        jump : {
+            imageSrc: './Sprite/MedievalKingPack/Jump.png',
+            framesMax: 2,
+
+        },
+        fall : {
+            imageSrc: './Sprite/MedievalKingPack/Fall.png',
+            framesMax: 2,
+        },
+        attack1 : {
+            imageSrc: './Sprite/MedievalKingPack/Attack1.png',
+            framesMax: 6,
+        }
+
+
+    },
+    attackBox: {
+        offset: {x: 60, y: 100},
+        width: 500,
+        height: 50,
+    }
 });
 
 
@@ -72,57 +126,56 @@ const keys = {
 }
 
 decreaseTimer()
-function animate() {
+function  animate() {
     requestAnimationFrame(animate);
-    c.fillStyle = 'black'; // Efface le canvas avec un fond noir
+    c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height);
+    background.drawbackground();
+    Player.update();
+    Enemy.update();
 
-    background.drawbackground(); // Dessine le fond
+    Player.velocity.x = 0;
+    Enemy.velocity.x = 0;
 
     // Player
-    // Réinitialisez la vitesse du joueur pour ne pas continuer à bouger si aucune touche n'est pressée
-    Player.velocity.x = 0;
-
-    // Gère la logique de déplacement vers la gauche
-    if (keys.q.pressed && Player.lastKey === 'q') {
+    if(keys.q.pressed && Player.lastKey === 'q') {
         Player.velocity.x = -3;
-        if (!Player.isRunning) {
-            Player.changeSprite('run');
-            Player.isRunning = true; // Indique que le joueur court maintenant
-        }
-    }
-    // Gère la logique de déplacement vers la droite
-    else if (keys.d.pressed && Player.lastKey === 'd') {
+        Player.switchSprite('run')
+    } else if(keys.d.pressed && Player.lastKey === 'd') {
         Player.velocity.x = 3;
-        if (!Player.isRunning) {
-            Player.changeSprite('run');
-            Player.isRunning = true;
-        }
-    }
-    // Si aucune touche de déplacement n'est pressée, l'animation revient à 'idle'
-    else {
-        if (Player.isRunning) {
-            Player.changeSprite('idle');
-            Player.isRunning = false; // Le joueur n'est plus en train de courir
-        }
+       Player.switchSprite('run')
+    }else {
+        Player.switchSprite('idle')
     }
 
-    Player.update();
+     if(Player.velocity.y<0){
+         Player.switchSprite('jump')
+     } else if(Player.velocity.y>0){
+            Player.switchSprite('fall')
+     }
 
     // Enemy
     if(keys.ArrowLeft.pressed && Enemy.lastKey === 'ArrowLeft') {
         Enemy.velocity.x = -3;
+        Enemy.switchSprite('run')
     }
     else if(keys.ArrowRight.pressed && Enemy.lastKey === 'ArrowRight') {
         Enemy.velocity.x = 3;
+        Enemy.switchSprite('run')
+    }else {
+        Enemy.switchSprite('idle')
     }
 
+    if(Enemy.velocity.y<0){
+        Enemy.switchSprite('jump')
+    } else if(Enemy.velocity.y>0){
+        Enemy.switchSprite('fall')
+    }
     // Player Attack
     if(rectangelCollision(Player, Enemy) && Player.isAttacking) {
         Player.isAttacking = false;
         Enemy.health -= 10;
         document.getElementById('EnemyHealth').style.width= Enemy.health + '%';
-        console.log('Collision');
     }
     // Ennemy Attack
     if(rectangelCollision(Enemy, Player) && Enemy.isAttacking) {
@@ -152,7 +205,7 @@ window.addEventListener('keydown', (event) => {
             Player.lastKey = 'q';
             break;
         case 'z':
-            Player.velocity.y = -20;
+            Player.velocity.y = -16;
             break;
         case ' ':
             Player.attack();
@@ -167,7 +220,7 @@ window.addEventListener('keydown', (event) => {
             Enemy.lastKey = 'ArrowLeft'
             break;
         case 'ArrowUp':
-            Enemy.velocity.y = -20;
+            Enemy.velocity.y = -16;
             break;
         case 'ArrowDown':
             Enemy.attack();
