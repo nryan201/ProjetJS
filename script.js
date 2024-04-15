@@ -1,3 +1,14 @@
+const quoteDisplayElement = document.getElementById('phrase')
+const quoteInputElement = document.getElementById('quoteInput')
+
+quoteInputElement.addEventListener('input', () => {
+    const arrayQuote = quoteDisplayElement.querySelectorAll();
+    const arrayValue = quoteInputElement.value.split('');
+    arrayQuote.forEach(((characterSpan, index) => {
+
+    })
+})
+
 // Fonction pour charger un fichier texte
 function File(texte_cvfc, callback) {
     var xhr = new XMLHttpRequest();
@@ -21,12 +32,5 @@ function sentence(texte_cvfc) {
 File("texte_cvfc.txt", function (texte_cvfc) {
     var phrase = sentence(texte_cvfc);
     document.getElementById("phrase").textContent = phrase; // Mettre à jour le contenu de l'élément HTML avec la phrase choisie
+    textArray = Array.from(phrase);
 });
-
-
-function characterArray (){
-    phrase.split('').forEach(character => {
-        const characterSpan = document.createElement("span");
-        characterSpan.innerText = character;
-    })
-}
