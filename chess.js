@@ -1,7 +1,9 @@
-const gameBoard = document.getElementById('gameboard');
-const playerDisplay = document.getElementById('player');
-const infoDisplay = document.getElementById('info-display');
-const width = 8;
+const gameBoard = document.getElementById('gameboard')
+const playerDisplay = document.getElementById('player')
+const infoDisplay = document.getElementById('info-display')
+const width = 8
+let playerGo = ' black '
+playerDisplay.textContent = ' black '
 
 const startPieces = [
     rook, knight, bishop, queen, king, bishop, knight, rook,
@@ -19,6 +21,7 @@ function createBoard() {
         const square = document.createElement('div')
         square.classList.add('square')
         square.innerHTML = startPiece
+        square.firstChild?.setAttribute('draggable', 'true')
         square.setAttribute('square-id', i )
         const row = Math.floor( (63 - i )/ 8) + 1
         if (row % 2 === 0) {
@@ -39,3 +42,56 @@ function createBoard() {
     })
 }
 createBoard()  
+
+const allSquares = document.querySelectorAll(" .square")
+
+allSquares.forEach(square => {
+    square.addEventListener('dragstart', dragStart)
+    square.addEventListener('dragover', dragOver)
+    square.addEventListener('drop', dragDrop)
+
+})
+
+let startPositionId
+let draggedElement
+
+function dragStart(e) {
+    startPositionId = e.target.parentNode.getAttribute('square-id')
+    draggedElement = e.target
+}
+
+function dragOver(e) {
+    e.preventDefault()
+}
+
+function dragDrop(e){
+    e.stopPropagation()
+    console.log(e.target)
+    const taken = e.target.classList.contains('piece')
+
+
+
+    // e.target.parentNode.append(draggedElement)
+    // e.target.remove()
+    // e.target.append(draggedElement)
+    changePlayer()
+}
+
+function changePlayer() {
+    playerGo = playerGo === ' black ' ? ' white ' : ' black '
+    playerDisplay.textContent = playerGo
+    revertIds ()
+    reverseIds()}
+
+function reverseIds() {
+    const allSquares = document.querySelectorAll(".square")
+    allSquares.forEach((square, i) => 
+        square.setAttribute('square-id',(width * width -1) - i ))
+}
+
+function revertIds() {
+    const allSquares = document.querySelectorAll(".square")
+    allSquares.forEach((square, i) => 
+        square.setAttribute('square-id', i))
+    
+}
