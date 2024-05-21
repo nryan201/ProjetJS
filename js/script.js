@@ -2,8 +2,8 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
 
-canvas.width = window.innerWidth-40;
-canvas.height = window.innerHeight-40;
+canvas.width = window.innerWidth-20;
+canvas.height = window.innerHeight-20;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -52,9 +52,11 @@ const Player = new Fighter({
     death : {
         imageSrc: './Sprite/MedievalWarriorPack/Death.png',
         framesMax: 9,
+    },
+    run2: {
+        imageSrc: './Sprite/MedievalWarriorPack/Run2.png',
+        framesMax: 8,
     }
-
-
     },
     attackBox: {
         offset: {x: 90, y: 100},
@@ -80,6 +82,10 @@ const Enemy = new Fighter({
         },
         run :{
             imageSrc: './Sprite/MedievalKingPack/Run.png',
+            framesMax: 8,
+        },
+        run2 :{
+            imageSrc: './Sprite/MedievalKingPack/Run2.png',
             framesMax: 8,
         },
         jump : {
@@ -156,7 +162,7 @@ function  animate() {
     // Player
     if(keys.q.pressed && Player.lastKey === 'q') {
         Player.velocity.x = -3;
-        Player.switchSprite('run')
+        Player.switchSprite('run2')
     } else if(keys.d.pressed && Player.lastKey === 'd') {
         Player.velocity.x = 3;
        Player.switchSprite('run')
@@ -177,7 +183,7 @@ function  animate() {
     }
     else if(keys.ArrowRight.pressed && Enemy.lastKey === 'ArrowRight') {
         Enemy.velocity.x = 3;
-        Enemy.switchSprite('run')
+        Enemy.switchSprite('run2')
     }else {
         Enemy.switchSprite('idle')
     }
