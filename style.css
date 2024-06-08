@@ -1,52 +1,53 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-#gameboard{
-    width: 320px;
-    height: 320px;
+body {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Couleur de fond */
 }
 
-.square{
-    width: 40px;
-    height: 40px;
-    position: relative;
+h1 {
+    color: #333;
 }
 
-.square svg {
-    height: 30px;
-    width: 30px;
-    margin : 5px;
-    position: relative;
-    z-index: -9;
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+    margin-top: 20px;
+    background-color: #ffffff; /* Couleur de fond du plateau de jeu */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour le plateau de jeu */
 }
 
-path {
-    position: relative;
-    z-index: -10;
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #008CBA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    color: transparent; /* Par défaut, le texte est transparent */
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Ajout de transition pour les effets */
 }
 
-.piece {
-    position: relative;
-    z-index: 9;
+.card:hover {
+    transform: scale(1.05); /* Légère mise à l'échelle au survol */
 }
 
-.beige{
-    background-color: rgb(110, 110, 98);
+.card.flip {
+    background-color: #FFF;
+    color: #000;
 }
 
-.brown{
-    background-color: rgb(169, 43, 43);
-}
-
-.black{
-fill: rgb(28, 28, 28)
-}
-
-.white{
-fill: rgb(255, 255, 255)
+.card.match {
+    background-color: #4CAF50;
+    color: #FFF;
 }
