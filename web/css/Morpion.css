@@ -60,3 +60,25 @@ h1 {
     transform: scale(1.1);
     background: linear-gradient(135deg, #8e9bf9, #6e7ff3);
 }
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Patua One', serif;
+    color: white;
+    background-color: #6b5b95;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #837db1;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #554c77;
+    transform: scale(0.95);
+}

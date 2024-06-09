@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/BubbleSorted.css">
-    <title>Title</title>
+    <title>Bubble Sorted</title>
 </head>
 <body>
-<h1 class="title">BUBBLE SORTED</h1>
-<div>
-    <label for="numElements">Nombre d'éléments : <span id="numElementsValue">20</span></label>
-    <input type="range" id="numElements" min="5" max="20" value="20" oninput="updateValue()">
-    <button onclick="generateArray()">Générer</button>
-    <button onclick="bubbleSorted()">Trier</button>
-    <button onclick="window.history.back()">Retour</button>
+<div class="main-container">
+    <div class="left-container"></div>
+    <div class="mid-container">
+        <h1 class="title">BUBBLE SORTED</h1>
+        <h2>Choisissez votre nombre d'éléments</h2>
+        <div class="controls">
+            <label for="numElements">Nombre d'éléments : <span id="numElementsValue">20</span></label>
+            <input type="range" id="numElements" min="5" max="20" value="20" oninput="updateValue()">
+            <div class="buttons">
+                <button onclick="generateArray()">Générer</button>
+                <button onclick="bubbleSorted()">Trier</button>
+                <button onclick="window.history.back()">Retour</button>
+            </div>
+        </div>
+        <div id="array"></div>
+    </div>
+    <div class="right-container"></div>
 </div>
-<div id="array"></div>
 <script src="../web/js/BubbleSorted.js"></script>
 </body>
 </html>

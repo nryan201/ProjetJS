@@ -1,9 +1,63 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-    background-color: #4d4c4c;
-    box-sizing: border-box;
+    background-color: #FFFFFF;
+    font-family: 'Patua One', serif;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.left-container, .right-container {
+    height: 100%;
+    width: 15%;
+    background-color: #805d2f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-container:before, .right-container:before {
+    content: '';
+    width: 230%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff7f50, #ff6347);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mid-container {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.title {
+    color: #000000;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #000000;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.controls {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
 }
 
 #array {
@@ -29,10 +83,14 @@ body {
 .block_id {
     position: absolute;
     color: #fff;
-    margin-top: 14px;
+    top: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     width: 100%;
     text-align: center;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); 
 }
+
 
 input[type="range"] {
     -webkit-appearance: none;
@@ -85,7 +143,7 @@ input[type="range"]::-moz-range-track {
 button {
     padding: 10px 20px;
     font-size: 16px;
-    font-family: sans-serif;
+    font-family: 'Patua One', serif;
     color: white;
     background-color: #6b5b95;
     border: none;
@@ -103,9 +161,4 @@ button:hover {
 button:active {
     background-color: #554c77;
     transform: scale(0.95);
-}
-.title{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
