@@ -1,0 +1,85 @@
+*{
+    box-sizing: border-box;
+}
+
+
+.GlobalContainer{
+    position: relative;
+    display:inline-block;
+}
+.HealthBar{
+    position: absolute;
+    display: flex;
+    width: 100%;
+    align-items: center ;
+    padding: 20px;
+}
+.Timer{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Enemy{
+    position: relative;
+    width: 100%;
+    height: 20px;
+}
+
+.GlobalEnemyHealthBar{
+    position: absolute;
+    background-color: blue;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+.EnemyHealthBar {
+    background-color: red;
+    width: 100%;
+    height: 20px;
+}
+
+.Player{
+    position: relative;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.GlobalPLayerHealthBar{
+    position: absolute;
+    background-color: blue;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    Width: 100%;
+}
+
+
+.PlayerHealthBar {
+    background-color: red;
+    width: 100%;
+    height: 20px;
+}
+
+
+.Tie{
+    position : absolute;
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+
+}
