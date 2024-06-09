@@ -3,6 +3,8 @@ const quoteInputElement = document.getElementById('quoteInput')
 const timerElement = document.getElementById('timer')
 
 let startTime;
+let typingStopped = false;
+let correctWordsCount = 0;
 
 quoteInputElement.addEventListener('input', () => {
     if (quoteInputElement.value.length === 1 && !startTime) {
@@ -25,6 +27,10 @@ quoteInputElement.addEventListener('input', () => {
             characterSpan.classList.add('incorrect');
         }
     })
+
+    const enteredWords = quoteInputElement.value.split(' ');
+    const originalWords = quoteDisplayElement.innerText.split(' ');
+    correctWordsCount = enteredWords.filter((word, index) => word === originalWords[index]).length;
 })
 
 // Fonction pour charger un fichier texte
@@ -81,10 +87,30 @@ File("texte_cvfc.txt", function (texte_cvfc) {
 function startTimer() {
     startTime = new Date();
     interval = setInterval(() => {
-        timerElement.innerText = getTimerTime();
+        const timeElapsed = getTimerTime();
+        timerElement.innerText = timeElapsed;
+
+        if (timeElapsed >= 30) {
+            stopTimer();
+            calculateWPM();
+        }
     }, 1000);
+}
+
+
+
+function stopTimer() {
+    clearInterval(interval);
+    typingStopped = true;
+    quoteInputElement.disabled = true; // Désactiver le champ de saisie
 }
 
 function getTimerTime () {
     return Math.floor((new Date() - startTime) / 1000)
+}
+
+function calculateWPM() {
+    const timeElapsedInMinutes = 30 / 60; // Temps écoulé en minutes (30 secondes)
+    const wpm = correctWordsCount / timeElapsedInMinutes;
+    alert(`Votre vitesse de frappe est de ${wpm.toFixed(2)} mots par minute.`);
 }
