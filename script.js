@@ -2,14 +2,19 @@ const quoteDisplayElement = document.getElementById('phrase')
 const quoteInputElement = document.getElementById('quoteInput')
 const timerElement = document.getElementById('timer')
 
+let startTime;
+
 quoteInputElement.addEventListener('input', () => {
+    if (quoteInputElement.value.length === 1 && !startTime) {
+        startTimer();
+    }
 
     console.log('change');
     const arrayQuote = quoteDisplayElement.querySelectorAll('span');
-    const arrayValue = quoteInputElement.value.split();
+    const arrayValue = quoteInputElement.value.split('');
     arrayQuote.forEach((characterSpan, index) => {
         const character = arrayValue[index];
-        if (character === null) {
+        if (character === undefined) {
             characterSpan.classList.remove('correct');
             characterSpan.classList.remove('incorrect');
         } else if (character === characterSpan.innerText) {
@@ -72,9 +77,14 @@ File("texte_cvfc.txt", function (texte_cvfc) {
     displayPhraseWithSpans(phrase);
 });
 
-let startTime
-function startTimer () {
-    timerElement.innerText = 0;
-    startTime = new Date();
 
+function startTimer() {
+    startTime = new Date();
+    interval = setInterval(() => {
+        timerElement.innerText = getTimerTime();
+    }, 1000);
+}
+
+function getTimerTime () {
+    return Math.floor((new Date() - startTime) / 1000)
 }
