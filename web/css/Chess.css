@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Honk&family=Patua+One&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Patua One", serif;
+    background-color: #e8e8e8; 
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#left-banner,
+#right-banner {
+    width: 130px;
+    height: 730px; 
+    background: linear-gradient(135deg, #ff7f50, #ff6347);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 -130px; 
+    position: absolute; 
+}
+
+#left-banner {
+    left: 0;
+}
+
+#right-banner {
+    right: 0;
+}
+
+#gameboard-container {
+    background-color: #c7c41f ;  
+    padding: 1rem;
+    border-radius: .5rem;
+    margin-top: 10px; 
+    position: relative; 
+}
+
+#gameboard {
+    width: 640px;
+    height: 640px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.square {
+    width: 80px;
+    height: 80px;
+    position: relative;
+}
+
+.square svg {
+    height: 60px;
+    width: 60px;
+    margin: 10px;
+    position: relative;
+    z-index: -9;
+}
+
+path {
+    position: relative;
+    z-index: -10;
+}
+
+.piece {
+    position: relative;
+    z-index: 9;
+}
+
+.beige {
+    background-color: rgb(110, 110, 98);
+}
+
+.brown {
+    background-color: rgb(169, 43, 43);
+}
+
+.black {
+    fill: rgb(28, 28, 28);
+}
+
+.white {
+    fill: rgb(255, 255, 255);
+}
+
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+}
