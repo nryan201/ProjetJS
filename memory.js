@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'groseille', img: 'img/groseille.png' },
         { name: 'mangue', img: 'img/mangue.png' },
         { name: 'mangue', img: 'img/mangue.png' },
-        { name: 'quenette', img: 'img/quenette.png' },
-        { name: 'quenette', img: 'img/quenette.png' },
+        { name: 'carambole', img: 'img/carambole.png' },
+        { name: 'carambole', img: 'img/carambole.png' },
     ];
 
     let gameBoard = document.getElementById('game-board');
