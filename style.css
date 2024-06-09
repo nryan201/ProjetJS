@@ -1,26 +1,62 @@
-body{
-    
-    background: #f0f0f0;
+body {
+    background: #e8e8e8;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
 }
 
-#board{
-    margin: 200px;
-    width: 300px;
-    height: 300px;
-    display:flex;
-    flex-wrap:wrap;
+h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #333;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#left-banner, #right-banner {
+    width: 120px; 
+    height: 360px;
+    background: linear-gradient(135deg, #ff7f50, #ff6347);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 20px;
+}
+
+#board {
+    width: 320px;
+    height: 320px;
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cell{
-    width:30%;
-    aspect-ratio: 1/1;
-    background: #a09b9b;
+.cell {
+    width: 30%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #6e7ff3, #8e9bf9);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
     font-weight: 700;
+    color: #ffffff;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.cell:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #8e9bf9, #6e7ff3);
 }
