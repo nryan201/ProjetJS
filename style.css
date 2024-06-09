@@ -6,7 +6,7 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Couleur de fond */
+    background-color: #f0f0f0; 
 }
 
 h1 {
@@ -15,36 +15,55 @@ h1 {
 
 #game-board {
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    gap: 10px;
+    grid-template-columns: repeat(4, 150px); 
+    gap: 15px; 
     margin-top: 20px;
-    background-color: #ffffff; /* Couleur de fond du plateau de jeu */
+    background-color: #ffffff; 
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour le plateau de jeu */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border: 5px solid #333;
+}
+
+#reset-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#reset-button:hover {
+    background-color: #45a049;
 }
 
 .card {
-    width: 100px;
-    height: 100px;
+    width: 150px; 
+    height: 150px;
     background-color: #008CBA;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2em;
-    color: transparent; /* Par défaut, le texte est transparent */
+    color: transparent; 
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Ajout de transition pour les effets */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; 
+    overflow: hidden; 
+}
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: none; 
 }
 
-.card:hover {
-    transform: scale(1.05); /* Légère mise à l'échelle au survol */
-}
-
-.card.flip {
-    background-color: #FFF;
-    color: #000;
+.card.flip img {
+    display: block; 
 }
 
 .card.match {

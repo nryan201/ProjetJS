@@ -1,31 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cardsArray = [
-        { name: 'A', img: 'img\aloe verra .png' },
-        { name: 'A', img: 'img\aloe verra .png' },
-        { name: 'B', img: 'img\banane.png' },
-        { name: 'B', img: 'img\banane.png' },
-        { name: 'C', img: 'img\coco.png' },
-        { name: 'C', img: 'img\coco.png' },
-        { name: 'D', img: 'img\Fruit a pain.jpg' },
-        { name: 'D', img: 'img\Fruit a pain.jpg' },
-        { name: 'E', img: 'img\goyave.png' },
-        { name: 'E', img: 'img\goyave.png' },
-        { name: 'F', img: 'img\groseille.png' },
-        { name: 'F', img: 'img\groseille.png' },
-        { name: 'G', img: 'img\mangue.png' },
-        { name: 'G', img: 'img\mangue.png' },
-        { name: 'H', img: 'img\quenette.png' },
-        { name: 'H', img: 'img\quenette.png' },
+        { name: 'fruit_de_la_passion', img: 'img/fruit_de_la_passion.png' },
+        { name: 'fruit_de_la_passion', img: 'img/fruit_de_la_passion.png' },
+        { name: 'igname', img: 'img/igname.png' },
+        { name: 'igname', img: 'img/igname.png' },
+        { name: 'coco', img: 'img/coco.png' },
+        { name: 'coco', img: 'img/coco.png' },
+        { name: 'fruit_a_pain', img: 'img/fruit_a_pain.png' },
+        { name: 'fruit_a_pain', img: 'img/fruit_a_pain.png' },
+        { name: 'goyave', img: 'img/goyave.png' },
+        { name: 'goyave', img: 'img/goyave.png' },
+        { name: 'groseille', img: 'img/groseille.png' },
+        { name: 'groseille', img: 'img/groseille.png' },
+        { name: 'mangue', img: 'img/mangue.png' },
+        { name: 'mangue', img: 'img/mangue.png' },
+        { name: 'quenette', img: 'img/quenette.png' },
+        { name: 'quenette', img: 'img/quenette.png' },
     ];
 
-    cardsArray.sort(() => 0.5 - Math.random());
-
-    const gameBoard = document.getElementById('game-board');
+    let gameBoard = document.getElementById('game-board');
     let chosenCards = [];
     let chosenCardsId = [];
     let cardsWon = [];
 
     function createBoard() {
+        gameBoard.innerHTML = ''; // Clear the board
+        cardsArray.sort(() => 0.5 - Math.random());
         cardsArray.forEach((item, index) => {
             const card = document.createElement('div');
             card.setAttribute('class', 'card');
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cards = document.querySelectorAll('.card');
         const optionOneId = chosenCardsId[0];
         const optionTwoId = chosenCardsId[1];
-        
+
         if (chosenCards[0] === chosenCards[1]) {
             cards[optionOneId].classList.add('match');
             cards[optionTwoId].classList.add('match');
@@ -75,6 +75,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+    function resetGame() {
+        chosenCards = [];
+        chosenCardsId = [];
+        cardsWon = [];
+        createBoard();
+    }
+
+    document.getElementById('reset-button').addEventListener('click', resetGame);
 
     createBoard();
 });
