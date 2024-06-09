@@ -1,8 +1,9 @@
 const quoteDisplayElement = document.getElementById('phrase')
 const quoteInputElement = document.getElementById('quoteInput')
+const timerElement = document.getElementById('timer')
 
 quoteInputElement.addEventListener('input', () => {
-    textArray.forEach(element => {})
+
     console.log('change');
     const arrayQuote = quoteDisplayElement.querySelectorAll('span');
     const arrayValue = quoteInputElement.value.split();
@@ -49,6 +50,11 @@ function sentence(texte_cvfc) {
 
 // Fonction pour séparer la phrase lettre par lettre et les entourer avec des <span>
 function displayPhraseWithSpans(phrase) {
+    if (!quoteDisplayElement) {
+        console.error('L\'élément quoteDisplayElement est introuvable.');
+        return;
+    }
+
     quoteDisplayElement.innerHTML = ''; // Vider le contenu précédent
     phrase.split('').forEach(character => {
         const span = document.createElement('span');
@@ -65,3 +71,10 @@ File("texte_cvfc.txt", function (texte_cvfc) {
     textArray = Array.from(phrase);
     displayPhraseWithSpans(phrase);
 });
+
+let startTime
+function startTimer () {
+    timerElement.innerText = 0;
+    startTime = new Date();
+
+}
