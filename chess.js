@@ -2,8 +2,8 @@ const gameBoard = document.getElementById('gameboard')
 const playerDisplay = document.getElementById('player')
 const infoDisplay = document.getElementById('info-display')
 const width = 8
-let playerGo = 'white'
-playerDisplay.textContent = 'white'
+let playerGo = 'black'
+playerDisplay.textContent = 'black'
 
 const startPieces = [
     rook, knight, bishop, queen, king, bishop, knight, rook,
@@ -31,19 +31,19 @@ function createBoard() {
         } 
 
         if (i <= 15) {
-            square.firstChild.firstChild.classList.add("black")
+            square.firstChild.firstChild.classList.add('black')
         }
 
         if (i >= 48) {
-            square.firstChild.firstChild.classList.add("white")
+            square.firstChild.firstChild.classList.add('white')
         }
 
-        gameBoard.appendChild(square)
+        gameBoard.append(square)
     })
 }
 createBoard()  
 
-const allSquares = document.querySelectorAll(" .square")
+const allSquares = document.querySelectorAll(".square")
 
 allSquares.forEach(square => {
     square.addEventListener('dragstart', dragStart)
@@ -128,6 +128,15 @@ function checkIfValid (target){
     console.log('targetId', targetId)
     console.log('startId', startId)
     console.log('piece',piece )
+     
+
+    /* 
+    voici les règles que les pioces doivent suivre pour être valides
+    effectivement ce n'est pas très élégant, mais c'est un bon début
+    
+
+    */
+
 
     switch (piece) {
         case 'pawn' :
@@ -312,7 +321,6 @@ function checkIfValid (target){
             }
     }
 }
-
 
 
 function checkWin () {
