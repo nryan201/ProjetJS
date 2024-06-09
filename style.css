@@ -4,44 +4,69 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     min-height: 100vh;
     margin: 0;
-    background-color: lightskyblue;
-}
-
-body, .quote-input{
     font-family: "Patua One", serif;
+    background-color: #e8e8e8; /* Couleur de fond similaire au thème précédent */
 }
 
-.container{
-    background-color: yellow;
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#left-banner,
+#right-banner {
+    width: 135px;
+    height: 400px; 
+    background: linear-gradient(135deg, #ff7f50, #ff6347);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 -100px; 
+    position: absolute; 
+}
+
+#left-banner {
+    left: 0;
+}
+
+#right-banner {
+    right: 0;
+}
+
+
+.container {
+    background-color: #ffff99; 
     padding: 1rem;
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
+    margin-top: 20px;
+    position: relative; 
 }
 
-.timer{
-    position: absolute;
-    top: 2px;
-    font-size: 3rem;
-    color: black;
+.timer {
+    font-size: 2rem; 
+    color: #000;  
     font-weight: bold;
+    margin-bottom: 10px; 
 }
 
-.phrase{
-    margin-bottom: 1rem;
-    margin-left: calc(1rem + 2px);
-    margin-right: calc(1rem + 2px);
-}
-
-.quote-input{
-    background-color: transparent;
-    border: 2px solid aqua;
+.quote-input {
+    background-color: #fff;
+    border: 2px solid #00ffff; 
     outline: none;
     width: 100%;
     height: 8rem;
@@ -52,15 +77,15 @@ body, .quote-input{
     border-radius: .5rem;
 }
 
-.quote-input:focus{
-    border-color: black;
+.quote-input:focus {
+    border-color: #000; 
 }
 
-.correct{
-    color: green;
+.correct {
+    color: green; 
 }
 
-.incorrect{
-    color: red;
-    text-decoration: underline;
+.incorrect {
+    color: red; 
+    text-decoration: underline; 
 }
